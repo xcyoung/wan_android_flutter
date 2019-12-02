@@ -1,0 +1,6 @@
+
+
+
+class BaseController extends Object {
+
+}
