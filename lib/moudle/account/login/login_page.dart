@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:wan_android/model/account_repository.dart';
+import 'package:wan_android/http/http_result_observable.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -73,15 +75,28 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () {
                       final account = _accountTextEditingController.text;
                       final password = _pwdTextEditingController.text;
-                      showDialog(
-                          context: context,
-                          builder: (_) {
-                            return AlertDialog(
-                              title: new Text('对话框'),
-                              content: Text(account + "\n" + password),
-                              actions: <Widget>[],
-                            );
-                          });
+                      WanHttpResultObservable<Object>(
+                          accountRepository.login(account, password)).watch((event) {
+                        showDialog(
+                            context: context,
+                            builder: (_) {
+                              return AlertDialog(
+                                title: new Text('对话框'),
+                                content: Text('登录成功！'),
+                                actions: <Widget>[],
+                              );
+                            });
+                      }, (code, message) {
+                        showDialog(
+                            context: context,
+                            builder: (_) {
+                              return AlertDialog(
+                                title: new Text('对话框'),
+                                content: Text('登录失败！'),
+                                actions: <Widget>[],
+                              );
+                            });
+                      });
                     },
                     child: new Padding(
                       padding: EdgeInsets.all(10),

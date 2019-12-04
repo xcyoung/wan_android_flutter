@@ -17,7 +17,7 @@ class EndPointController extends BaseController {
   }
 
   EndPoint getEndPoint() {
-    if (curEndPoint == null) {
+    if (curEndPoint.type == null) {
       setEndPoint('dev');
     }
     return curEndPoint;

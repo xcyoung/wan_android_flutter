@@ -13,7 +13,8 @@ class HttpManager {
   HttpManager._() {
     _dio = Dio();
     _dio.options = BaseOptions(
-        baseUrl: EndPointController.getInstance().getEndPoint().baseUrl,
+//        baseUrl: EndPointController.getInstance().getEndPoint().baseUrl,
+        baseUrl: 'https://www.wanandroid.com/',
         connectTimeout: 30000,
         receiveTimeout: 30000);
   }
