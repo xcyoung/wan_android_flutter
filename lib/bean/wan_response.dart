@@ -1,20 +1,21 @@
-import 'package:json_annotation/json_annotation.dart';
+class WanResponse<T> {
+	T data;
+	int errorCode;
+	String errorMsg;
 
-part 'wan_response.g.dart';
+	WanResponse({this.data, this.errorCode, this.errorMsg});
 
-@JsonSerializable()
-class WanResponse<T> extends Object {
-  @JsonKey(name: 'errorCode')
-  int errorCode;
-  @JsonKey(name: 'errorMsg')
-  String errorMsg;
-  @JsonKey(name: 'data')
-  T data;
+	WanResponse.fromJson(Map<String, dynamic> json) {
+		data = json['data'];
+		errorCode = json['errorCode'];
+		errorMsg = json['errorMsg'];
+	}
 
-  WanResponse();
-
-  factory WanResponse.fromJson(Map<String, dynamic> srcJson) =>
-      _$WanResponseFromJson(srcJson);
-
-  Map<String, dynamic> toJson() => _$WanResponseToJson(this);
+	Map<String, dynamic> toJson() {
+		final Map<String, dynamic> data = new Map<String, dynamic>();
+		data['data'] = this.data;
+		data['errorCode'] = this.errorCode;
+		data['errorMsg'] = this.errorMsg;
+		return data;
+	}
 }
