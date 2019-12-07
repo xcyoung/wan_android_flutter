@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:wan_android/bean/article/article_model.dart';
+import 'package:wan_android/moudle/article/model/article_model.dart';
 
-class HomeItem extends StatefulWidget {
+// ignore: must_be_immutable
+class ArticleListItem extends StatefulWidget {
   ArticleBean item;
 
-  HomeItem(this.item);
+  ArticleListItem(this.item);
 
   @override
-  _HomeItemState createState() => _HomeItemState();
+  _ArticleListItemState createState() => _ArticleListItemState();
 }
 
-class _HomeItemState extends State<HomeItem> {
+class _ArticleListItemState extends State<ArticleListItem> {
   @override
   Widget build(BuildContext context) {
     final item = widget.item;
@@ -32,7 +33,7 @@ class _HomeItemState extends State<HomeItem> {
                 Offstage(
                   offstage: item.tags.length <= 0,
                   child: Text(
-                    item.tags[0].name,
+                    item.tags.length > 0 ? item.tags[0].name : '',
                     style: TextStyle(color: Colors.red, fontSize: 12),
                   ),
                 ),

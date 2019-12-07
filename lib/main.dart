@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wan_android/controller/end_point_controller.dart';
-import 'package:wan_android/moudle/account/login/login_page.dart';
-import 'package:wan_android/moudle/home_page.dart';
+import 'package:wan_android/moudle/article/page/article_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -23,7 +21,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: ArticlePage(),
     );
   }
 }

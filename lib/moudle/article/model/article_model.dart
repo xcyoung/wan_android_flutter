@@ -31,7 +31,36 @@ class ArticleBean {
   String shareUser;
   String desc;
 
-  ArticleBean({this.shareDate, this.projectLink, this.prefix, this.origin, this.link, this.title, this.type, this.selfVisible, this.apkLink, this.envelopePic, this.audit, this.chapterId, this.id, this.courseId, this.superChapterName, this.publishTime, this.niceShareDate, this.visible, this.niceDate, this.author, this.zan, this.chapterName, this.userId, this.tags, this.superChapterId, this.fresh, this.collect, this.shareUser, this.desc});
+  ArticleBean(
+      {this.shareDate,
+      this.projectLink,
+      this.prefix,
+      this.origin,
+      this.link,
+      this.title,
+      this.type,
+      this.selfVisible,
+      this.apkLink,
+      this.envelopePic,
+      this.audit,
+      this.chapterId,
+      this.id,
+      this.courseId,
+      this.superChapterName,
+      this.publishTime,
+      this.niceShareDate,
+      this.visible,
+      this.niceDate,
+      this.author,
+      this.zan,
+      this.chapterName,
+      this.userId,
+      this.tags,
+      this.superChapterId,
+      this.fresh,
+      this.collect,
+      this.shareUser,
+      this.desc});
 
   ArticleBean.fromJson(Map<String, dynamic> json) {
     shareDate = json['shareDate'];
@@ -59,7 +88,7 @@ class ArticleBean {
     userId = json['userId'];
     if (json['tags'] != null) {
       tags = new List<Tag>();
-      json['datas'].forEach((v) {
+      json['tags'].forEach((v) {
         tags.add(Tag.fromJson(v)); //使用EntityFactory解析对象
       });
     }
@@ -96,7 +125,7 @@ class ArticleBean {
     data['chapterName'] = this.chapterName;
     data['userId'] = this.userId;
     if (this.tags != null) {
-      data['tags'] =  this.tags;
+      data['tags'] = this.tags;
     }
     data['superChapterId'] = this.superChapterId;
     data['fresh'] = this.fresh;
@@ -127,6 +156,5 @@ class Tag {
 }
 
 class ArticleList extends Pagination<ArticleBean> {
-
-  ArticleList();
+  ArticleList(Map<String, dynamic> json) : super.fromJson(json);
 }

@@ -27,9 +27,11 @@ class Pagination<T> {
     size = json['size'];
     if (json['datas'] != null) {
       datas = new List<T>();
-      json['datas'].forEach((v) {
-        datas.add(EntityFactory.generateOBJ<T>(v)); //使用EntityFactory解析对象
-      });
+      if (json['datas'] is List) {
+        (json['datas'] as List).forEach((item) {
+          datas.add(EntityFactory.generateOBJ<T>(item));
+        });
+      }
     }
   }
 
