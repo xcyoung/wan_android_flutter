@@ -1,15 +1,18 @@
+import 'package:wan_android/moudle/account/account_presenter.dart';
+import 'package:wan_android/moudle/article/page/article_page.dart';
+import 'package:wan_android/mvp/mvp_export.dart';
 import 'package:flutter/material.dart';
-import 'package:wan_android/http/http_result_observable.dart';
-import 'package:wan_android/moudle/account/model/account_repository.dart';
 
 class LoginPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  LoginPageState createState() => LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class LoginPageState extends BaseState<LoginPage, AccountPresenter> {
   final _accountTextEditingController = new TextEditingController();
   final _pwdTextEditingController = new TextEditingController();
+  var _isShowClear = false;
+  var _isShowPwd = false;
 
   @override
   Widget build(BuildContext context) {
@@ -27,16 +30,37 @@ class _LoginPageState extends State<LoginPage> {
                 padding: EdgeInsets.all(10),
                 child: new TextField(
                   controller: _accountTextEditingController,
-                  maxLength: 100,
-                  minLines: 1,
                   autocorrect: true,
-                  decoration: new InputDecoration(
-                    labelText: '请输入用户名',
-                    helperText: '用户名',
-                    icon: new Icon(Icons.account_box),
-                  ),
+                  decoration: InputDecoration(
+                      labelText: '用户名',
+                      hintText: '请输入用户名',
+                      enabledBorder: UnderlineInputBorder(borderSide: BorderSide(
+                          color: Color(0xFF999999),
+                          width: 0.6
+                      )),
+                      focusedBorder: UnderlineInputBorder(borderSide: BorderSide(
+                          color: Color(0xFF333333),
+                          width: 0.6
+                      )),
+                      suffixIcon: (_isShowClear)
+                          ? IconButton(
+                              iconSize: 16.0,
+                              icon: Icon(Icons.close),
+                              onPressed: () {
+                                _accountTextEditingController.clear();
+                              },
+                            )
+                          : null),
                   onChanged: (text) {
-                    // 内容监听回调
+                    if (_isShowClear && text.length <= 0) {
+                      setState(() {
+                        _isShowClear = false;
+                      });
+                    } else if (!_isShowClear && text.length > 0) {
+                      setState(() {
+                        _isShowClear = true;
+                      });
+                    }
                   },
                   onSubmitted: (text) {
                     //  内容提交回调
@@ -47,16 +71,31 @@ class _LoginPageState extends State<LoginPage> {
                 padding: EdgeInsets.all(10),
                 child: new TextField(
                   controller: _pwdTextEditingController,
-                  maxLength: 100,
-                  minLines: 1,
                   autocorrect: true,
-                  obscureText: true,
+                  obscureText: !_isShowPwd,
                   keyboardType: TextInputType.text,
                   decoration: new InputDecoration(
-                    labelText: '请输入密码',
-                    helperText: '密码',
-                    icon: new Icon(Icons.lock),
-                  ),
+                      labelText: '密码',
+                      hintText: '请输入密码',
+                      enabledBorder: UnderlineInputBorder(borderSide: BorderSide(
+                          color: Color(0xFF999999),
+                          width: 0.6
+                      )),
+                      focusedBorder: UnderlineInputBorder(borderSide: BorderSide(
+                          color: Color(0xFF333333),
+                          width: 0.6
+                      )),
+                      suffixIcon: IconButton(
+                        iconSize: 16.0,
+                        icon: Icon(_isShowPwd
+                            ? Icons.visibility
+                            : Icons.visibility_off),
+                        onPressed: () {
+                          setState(() {
+                            _isShowPwd = !_isShowPwd;
+                          });
+                        },
+                      )),
                   onChanged: (text) {
                     // 内容监听回调
                   },
@@ -69,46 +108,42 @@ class _LoginPageState extends State<LoginPage> {
                 width: 800,
                 margin: EdgeInsets.all(10),
                 padding: EdgeInsets.all(10),
-                child: new FlatButton(
+                child: FlatButton(
                     color: Colors.blue,
                     textColor: Colors.white,
-                    onPressed: () {
-                      final account = _accountTextEditingController.text;
-                      final password = _pwdTextEditingController.text;
-                      WanHttpResultObservable<Object>(
-                          accountRepository.login(account, password)).watch((event) {
-                        showDialog(
-                            context: context,
-                            builder: (_) {
-                              return AlertDialog(
-                                title: new Text('对话框'),
-                                content: Text('登录成功！'),
-                                actions: <Widget>[],
-                              );
-                            });
-                      }, (code, message) {
-                        showDialog(
-                            context: context,
-                            builder: (_) {
-                              return AlertDialog(
-                                title: new Text('对话框'),
-                                content: Text('登录失败！'),
-                                actions: <Widget>[],
-                              );
-                            });
-                      });
-                    },
-                    child: new Padding(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0)),
+                    onPressed: _onLoginClick,
+                    child: Padding(
                       padding: EdgeInsets.all(10),
-                      child: new Text(
+                      child: Text(
                         '登录',
-                        style:
-                            new TextStyle(color: Colors.white, fontSize: 16.0),
+                        style: TextStyle(color: Colors.white, fontSize: 16.0),
                       ),
                     )),
               )
             ],
           )
         ]));
+  }
+
+  @override
+  AccountPresenter createPresenter() {
+    return AccountPresenter();
+  }
+
+  void _onLoginClick() {
+    final account = _accountTextEditingController.text;
+    final password = _pwdTextEditingController.text;
+    if (account.isEmpty || password.isNotEmpty) {
+      return;
+    }
+    presenter.login(account, password);
+  }
+
+  void onLoginSuccess() {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return ArticlePage();
+    }));
   }
 }
