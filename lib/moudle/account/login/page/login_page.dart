@@ -2,6 +2,7 @@ import 'package:wan_android/moudle/account/account_presenter.dart';
 import 'package:wan_android/moudle/article/page/article_page.dart';
 import 'package:wan_android/mvp/mvp_export.dart';
 import 'package:flutter/material.dart';
+import 'package:wan_android/widget/XTextField.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -34,14 +35,12 @@ class LoginPageState extends BaseState<LoginPage, AccountPresenter> {
                   decoration: InputDecoration(
                       labelText: '用户名',
                       hintText: '请输入用户名',
-                      enabledBorder: UnderlineInputBorder(borderSide: BorderSide(
-                          color: Color(0xFF999999),
-                          width: 0.6
-                      )),
-                      focusedBorder: UnderlineInputBorder(borderSide: BorderSide(
-                          color: Color(0xFF333333),
-                          width: 0.6
-                      )),
+                      enabledBorder: UnderlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Color(0xFF999999), width: 0.6)),
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Color(0xFF333333), width: 0.6)),
                       suffixIcon: (_isShowClear)
                           ? IconButton(
                               iconSize: 16.0,
@@ -77,14 +76,12 @@ class LoginPageState extends BaseState<LoginPage, AccountPresenter> {
                   decoration: new InputDecoration(
                       labelText: '密码',
                       hintText: '请输入密码',
-                      enabledBorder: UnderlineInputBorder(borderSide: BorderSide(
-                          color: Color(0xFF999999),
-                          width: 0.6
-                      )),
-                      focusedBorder: UnderlineInputBorder(borderSide: BorderSide(
-                          color: Color(0xFF333333),
-                          width: 0.6
-                      )),
+                      enabledBorder: UnderlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Color(0xFF999999), width: 0.6)),
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Color(0xFF333333), width: 0.6)),
                       suffixIcon: IconButton(
                         iconSize: 16.0,
                         icon: Icon(_isShowPwd
@@ -121,6 +118,14 @@ class LoginPageState extends BaseState<LoginPage, AccountPresenter> {
                         style: TextStyle(color: Colors.white, fontSize: 16.0),
                       ),
                     )),
+              ),
+              XTextField(
+                width: 300,
+                height: 50,
+                inputType: TextInputType.text,
+                prefixIcon: Icon(Icons.lock),
+                suffixIcon: Icon(Icons.visibility),
+                duration: Duration(milliseconds: 500),
               )
             ],
           )
