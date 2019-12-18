@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class XTextField extends StatefulWidget {
   final BorderRadius cornerRadius;
   final double width, height, wordSpacing;
-  final Color backgroundColor, accentColor, textColor;
+  final Color backgroundColor, accentColor, textColor, placeHolderColor;
   final String placeHolder, fontFamily;
   final Icon prefixIcon, suffixIcon;
   final TextInputType inputType;
@@ -23,11 +23,13 @@ class XTextField extends StatefulWidget {
       @required this.width,
       @required this.height,
       @required this.inputType,
-      this.cornerRadius = const BorderRadius.all(Radius.circular(10)),
+      this.cornerRadius = const BorderRadius.all(Radius.circular(5)),
       this.wordSpacing,
-      this.backgroundColor = const Color(0xff111823),
+//      this.backgroundColor = const Color(0xff111823),
+      this.backgroundColor = Colors.white,
       this.textColor = const Color(0xff5c5bb0),
       this.accentColor = Colors.white,
+      this.placeHolderColor = Colors.grey,
       this.placeHolder = "Placeholder",
       this.fontFamily,
       this.suffixIcon,
@@ -58,7 +60,7 @@ class XTextField extends StatefulWidget {
 }
 
 class _XTextFieldState extends State<XTextField> {
-  bool _isFocus = false;
+  bool _onChange = false;
 
   @override
   Widget build(BuildContext context) {
@@ -73,40 +75,40 @@ class _XTextFieldState extends State<XTextField> {
               ? [BoxShadow(color: Colors.grey, blurRadius: 2, spreadRadius: 1)]
               : [BoxShadow(spreadRadius: 0, blurRadius: 0)],
           borderRadius: widget.cornerRadius,
-          color: widget.suffixIcon == null
-              ? _isFocus ? widget.accentColor : widget.backgroundColor
-              : widget.backgroundColor),
+          color: widget.backgroundColor),
       child: Stack(
         children: <Widget>[
+//          widget.suffixIcon == null
+//              ? Container()
+//              : _onChange
+//                  ? Align(
+//                      alignment: Alignment.centerRight,
+//                      child: AnimatedContainer(
+//                        width: 40,
+//                        height: 40,
+//                        margin: EdgeInsets.only(right: 7),
+//                        duration: widget.duration,
+//                        decoration: BoxDecoration(
+//                          borderRadius: BorderRadius.all(Radius.circular(60)),
+//                          color: widget.backgroundColor,
+//                        ),
+//                      ))
+//                  : Container(),
           widget.suffixIcon == null
               ? Container()
-              : Align(
-                  alignment: Alignment.centerRight,
-                  child: AnimatedContainer(
-                    width: _isFocus ? 500 : 40,
-                    height: _isFocus ? widget.height : 40,
-                    margin: EdgeInsets.only(right: _isFocus ? 0 : 7),
-                    duration: widget.duration,
-                    decoration: BoxDecoration(
-                      borderRadius: _isFocus
-                          ? widget.cornerRadius
-                          : BorderRadius.all(Radius.circular(60)),
-                      color: widget.accentColor,
-                    ),
-                  )),
-          widget.suffixIcon == null
-              ? Container()
-              : GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    margin: EdgeInsets.only(right: 15),
-                    alignment: Alignment.centerRight,
-                    child: Icon(
-                      widget.suffixIcon.icon,
-                      color: widget.textColor,
-                    ),
-                  ),
-                ),
+              : _onChange
+                  ? GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        margin: EdgeInsets.only(right: 15),
+                        alignment: Alignment.centerRight,
+                        child: Icon(
+                          widget.suffixIcon.icon,
+                          color: widget.accentColor,
+                        ),
+                      ),
+                    )
+                  : Container(),
           Center(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -115,8 +117,7 @@ class _XTextFieldState extends State<XTextField> {
                   flex: 1,
                   child: Icon(
                     widget.prefixIcon.icon,
-                    color:
-                        _isFocus ? widget.backgroundColor : widget.accentColor,
+                    color: widget.accentColor,
                   ),
                 ),
                 Expanded(
@@ -143,29 +144,33 @@ class _XTextFieldState extends State<XTextField> {
                       maxLength: widget.maxLength,
                       maxLines: widget.maxLines,
                       minLines: widget.minLines,
-                      onChanged: widget.onChanged,
+                      onChanged: (str) {
+                        if (str.length > 0) {
+                          if (!_onChange) {
+                            setState(() {
+                              _onChange = true;
+                            });
+                          }
+                        } else {
+                          setState(() {
+                            _onChange = false;
+                          });
+                        }
+                      },
                       onTap: () {
-                        setState(() {
-                          _isFocus = true;
-                        });
                         if (widget.onTap != null) {
                           widget.onTap();
                         }
                       },
                       onSubmitted: (t) {
-                        setState(() {
-                          _isFocus = false;
-                        });
                         widget.onSubmitted(t);
                       },
                       textInputAction: TextInputAction.done,
                       decoration: InputDecoration(
-                          hintStyle: TextStyle(color: widget.textColor),
+                          hintStyle: TextStyle(color: widget.placeHolderColor),
                           hintText: widget.placeHolder,
                           border: InputBorder.none),
-                      cursorColor: _isFocus
-                          ? widget.accentColor
-                          : widget.backgroundColor,
+                      cursorColor: widget.textColor,
                     ),
                   ),
                 ),
