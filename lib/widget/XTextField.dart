@@ -17,12 +17,13 @@ class XTextField extends StatefulWidget {
   final int maxLength, minLines, maxLines;
   final ValueChanged<String> onChanged, onSubmitted;
   final GestureTapCallback onTap;
+  final TextEditingController controller;
 
   const XTextField(
-      {@required this.prefixIcon,
-      @required this.width,
+      {@required this.width,
       @required this.height,
       @required this.inputType,
+      this.prefixIcon,
       this.cornerRadius = const BorderRadius.all(Radius.circular(5)),
       this.wordSpacing,
 //      this.backgroundColor = const Color(0xff111823),
@@ -49,11 +50,11 @@ class XTextField extends StatefulWidget {
       this.maxLines,
       this.onChanged,
       this.onSubmitted,
-      this.onTap})
+      this.onTap,
+      this.controller})
       : assert(width != null),
         assert(height != null),
-        assert(inputType != null),
-        assert(prefixIcon != null);
+        assert(inputType != null);
 
   @override
   _XTextFieldState createState() => _XTextFieldState();
@@ -70,30 +71,8 @@ class _XTextFieldState extends State<XTextField> {
       height: widget.height,
       margin: widget.margin,
       alignment: Alignment.centerRight,
-      decoration: BoxDecoration(
-          boxShadow: widget.isShadow
-              ? [BoxShadow(color: Colors.grey, blurRadius: 2, spreadRadius: 1)]
-              : [BoxShadow(spreadRadius: 0, blurRadius: 0)],
-          borderRadius: widget.cornerRadius,
-          color: widget.backgroundColor),
       child: Stack(
         children: <Widget>[
-//          widget.suffixIcon == null
-//              ? Container()
-//              : _onChange
-//                  ? Align(
-//                      alignment: Alignment.centerRight,
-//                      child: AnimatedContainer(
-//                        width: 40,
-//                        height: 40,
-//                        margin: EdgeInsets.only(right: 7),
-//                        duration: widget.duration,
-//                        decoration: BoxDecoration(
-//                          borderRadius: BorderRadius.all(Radius.circular(60)),
-//                          color: widget.backgroundColor,
-//                        ),
-//                      ))
-//                  : Container(),
           widget.suffixIcon == null
               ? Container()
               : _onChange
@@ -113,13 +92,15 @@ class _XTextFieldState extends State<XTextField> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Expanded(
-                  flex: 1,
-                  child: Icon(
-                    widget.prefixIcon.icon,
-                    color: widget.accentColor,
-                  ),
-                ),
+                widget.prefixIcon == null
+                    ? Container()
+                    : Expanded(
+                        flex: 1,
+                        child: Icon(
+                          widget.prefixIcon.icon,
+                          color: widget.accentColor,
+                        ),
+                      ),
                 Expanded(
                   flex: 5,
                   child: Container(
@@ -144,6 +125,7 @@ class _XTextFieldState extends State<XTextField> {
                       maxLength: widget.maxLength,
                       maxLines: widget.maxLines,
                       minLines: widget.minLines,
+                      controller: widget.controller,
                       onChanged: (str) {
                         if (str.length > 0) {
                           if (!_onChange) {
