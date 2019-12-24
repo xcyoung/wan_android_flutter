@@ -81,10 +81,7 @@ class _XTextFieldState extends State<XTextField> {
                       child: Container(
                         margin: EdgeInsets.only(right: 15),
                         alignment: Alignment.centerRight,
-                        child: Icon(
-                          widget.suffixIcon.icon,
-                          color: widget.accentColor,
-                        ),
+                        child: widget.suffixIcon,
                       ),
                     )
                   : Container(),
@@ -96,10 +93,7 @@ class _XTextFieldState extends State<XTextField> {
                     ? Container()
                     : Expanded(
                         flex: 1,
-                        child: Icon(
-                          widget.prefixIcon.icon,
-                          color: widget.accentColor,
-                        ),
+                        child: widget.prefixIcon,
                       ),
                 Expanded(
                   flex: 5,

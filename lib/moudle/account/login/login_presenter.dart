@@ -11,4 +11,12 @@ class LoginPresenter extends BasePresenter<LoginPageState> {
       view.onLoginSuccess();
     }, (code, message) {}));
   }
+
+  void reg(String account, String password, String rePassword) {
+    addSubscription(WanHttpResultObservable<Object>(
+            accountRepository.register(account, password, rePassword))
+        .watch((result) {
+      view.onRegSuccess();
+    }, (code, message) {}));
+  }
 }
