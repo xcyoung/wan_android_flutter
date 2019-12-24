@@ -4,7 +4,8 @@ import 'base_presenter.dart';
 import 'mvps.dart';
 
 abstract class BaseState<W extends StatefulWidget, P extends BasePresenter>
-    extends State<W> implements IMvpView {
+    extends State<W>
+    implements IMvpView {
   P presenter;
 
   BaseState() {
@@ -13,6 +14,8 @@ abstract class BaseState<W extends StatefulWidget, P extends BasePresenter>
   }
 
   P createPresenter();
+
+  void onError(int code, String message);
 
   @override
   Widget build(BuildContext context) {

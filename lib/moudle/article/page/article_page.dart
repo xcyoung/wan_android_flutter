@@ -39,4 +39,9 @@ class ArticlePageState extends BaseState<ArticlePage, ArticlePresenter> {
   ArticlePresenter createPresenter() {
     return ArticlePresenter();
   }
+
+  @override
+  void onError(int code, String message) {
+
+  }
 }

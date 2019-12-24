@@ -28,6 +28,7 @@ dependencies:
   json_annotation: 3.0.0
   provider: 3.2.0
   font_awesome_flutter: 8.5.0
+  bot_toast: 2.2.0
 #  flutter_bloc: 2.1.1
 dev_dependencies:
   flutter_test:

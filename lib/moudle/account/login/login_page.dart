@@ -1,11 +1,12 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wan_android/moudle/account/login/login_presenter.dart';
 import 'package:wan_android/moudle/article/page/article_page.dart';
 import 'package:wan_android/mvp/mvp_export.dart';
-import 'package:flutter/material.dart';
-import 'package:wan_android/widget/x_textfield.dart';
+import 'package:wan_android/utils/toast_extension.dart';
 import 'package:wan_android/widget/wave_widget.dart';
-import 'package:flutter/services.dart';
+import 'package:wan_android/widget/x_textfield.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -341,8 +342,10 @@ class LoginPageState extends BaseState<LoginPage, LoginPresenter>
     final account = _loginAccountController.text;
     final password = _loginPwdController.text;
     if (account.isEmpty || password.isEmpty) {
+      toast("请输入完整信息");
       return;
     }
+    showLoading();
     presenter.login(account, password);
   }
 
@@ -351,19 +354,32 @@ class LoginPageState extends BaseState<LoginPage, LoginPresenter>
     final password = _regPwdController.text;
     final confirm = _confirmPwdTextEditingController.text;
     if (account.isEmpty || password.isEmpty || confirm.isEmpty) {
+      toast("请输入完整信息");
       return;
     }
-    if (password != confirm) return;
+    if (password != confirm) {
+      toast('两次密码不一致');
+      return;
+    }
+    showLoading();
     presenter.reg(account, password, confirm);
   }
 
   void onLoginSuccess() {
+    hideLoading();
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return ArticlePage();
     }));
   }
 
   void onRegSuccess() {
+    hideLoading();
     _tabController.index = 0;
+  }
+
+  @override
+  void onError(int code, String message) {
+    hideLoading();
+    toast('[$code]$message');
   }
 }
