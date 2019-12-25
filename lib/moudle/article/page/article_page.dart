@@ -11,11 +11,12 @@ class ArticlePage extends StatefulWidget {
   ArticlePageState createState() => ArticlePageState();
 }
 
-class ArticlePageState extends BaseState<ArticlePage, ArticlePresenter> {
+class ArticlePageState extends BaseState<ArticlePage, ArticlePresenter> with AutomaticKeepAliveClientMixin {
   ListProvider<ArticleBean> provider = ListProvider<ArticleBean>();
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return ChangeNotifierProvider<ListProvider<ArticleBean>>(
       create: (_) => provider,
       child: Scaffold(
@@ -44,4 +45,7 @@ class ArticlePageState extends BaseState<ArticlePage, ArticlePresenter> {
   void onError(int code, String message) {
 
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

@@ -117,7 +117,7 @@ class _XTextFieldState extends State<XTextField> {
                       focusNode: widget.focusNode,
                       enabled: widget.enabled,
                       maxLength: widget.maxLength,
-                      maxLines: widget.maxLines,
+                      maxLines: widget.obscureText ? 1 : widget.maxLines,
                       minLines: widget.minLines,
                       controller: widget.controller,
                       onChanged: (str) {

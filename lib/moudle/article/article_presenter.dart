@@ -10,15 +10,16 @@ class ArticlePresenter extends BasePresenter<ArticlePageState> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      addSubscription(WanHttpResultObservable<ArticleList>(
-              articleRepository.getArticleList(0))
-          .watch((result) {
-        view.provider.clear();
-        view.provider.addAll(result.data.datas);
-      }, (code, message) {
+    addSubscription(WanHttpResultObservable<ArticleList>(
+        articleRepository.getArticleList(0))
+        .watch((result) {
+      view.provider.clear();
+      view.provider.addAll(result.data.datas);
+    }, (code, message) {
 
-      }));
-    });
+    }));
+//    WidgetsBinding.instance.addPostFrameCallback((_) {
+//
+//    });
   }
 }
