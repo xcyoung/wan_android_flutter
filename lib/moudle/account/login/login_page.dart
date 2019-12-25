@@ -7,6 +7,7 @@ import 'package:wan_android/mvp/mvp_export.dart';
 import 'package:wan_android/utils/toast_extension.dart';
 import 'package:wan_android/widget/wave_widget.dart';
 import 'package:wan_android/widget/x_textfield.dart';
+import 'package:wan_android/generated/i18n.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -22,14 +23,13 @@ class LoginPageState extends BaseState<LoginPage, LoginPresenter>
   final _regAccountController = new TextEditingController();
   final _regPwdController = new TextEditingController();
   final _confirmPwdTextEditingController = new TextEditingController();
-  final List<String> _items = ['登录', '注册'];
   var _curPosition = 0;
   TabController _tabController;
 
   @override
   void initState() {
     _tabController = TabController(
-      length: _items.length,
+      length: 2,
       vsync: this,
     );
     _tabController.addListener(() {
@@ -92,7 +92,7 @@ class LoginPageState extends BaseState<LoginPage, LoginPresenter>
                               ],
                             ),
                             child: DefaultTabController(
-                                length: _items.length,
+                                length: 2,
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -115,11 +115,18 @@ class LoginPageState extends BaseState<LoginPage, LoginPresenter>
                                             EdgeInsets.fromLTRB(16, 8, 16, 0),
                                         labelStyle: TextStyle(
                                             fontSize: 18, letterSpacing: 5.0),
-                                        tabs: _items.map((String title) {
-                                          return Tab(
-                                            text: title,
-                                          );
-                                        }).toList(),
+                                        tabs: [
+                                          Tab(
+                                            text: S
+                                                .of(context)
+                                                .wan_account_tab_title_login,
+                                          ),
+                                          Tab(
+                                            text: S
+                                                .of(context)
+                                                .wan_account_tab_title_reg,
+                                          )
+                                        ],
                                         isScrollable: false,
                                       ),
                                     ),
@@ -149,7 +156,9 @@ class LoginPageState extends BaseState<LoginPage, LoginPresenter>
                                                   width: 300,
                                                   height: 50,
                                                   inputType: TextInputType.text,
-                                                  placeHolder: '用户名',
+                                                  placeHolder: S
+                                                      .of(context)
+                                                      .wan_account_user_name_hint,
                                                   textColor: Colors.black87,
                                                   accentColor: Colors.black54,
                                                   placeHolderColor:
@@ -177,7 +186,9 @@ class LoginPageState extends BaseState<LoginPage, LoginPresenter>
                                                   height: 50,
                                                   inputType: TextInputType.text,
                                                   obscureText: true,
-                                                  placeHolder: '密码',
+                                                  placeHolder: S
+                                                      .of(context)
+                                                      .wan_account_user_pwd_hint,
                                                   textColor: Colors.black87,
                                                   accentColor: Colors.black54,
                                                   placeHolderColor:
@@ -211,7 +222,9 @@ class LoginPageState extends BaseState<LoginPage, LoginPresenter>
                                                   width: 300,
                                                   height: 50,
                                                   inputType: TextInputType.text,
-                                                  placeHolder: '用户名',
+                                                  placeHolder: S
+                                                      .of(context)
+                                                      .wan_account_user_name_hint,
                                                   textColor: Colors.black87,
                                                   accentColor:
                                                       Colors.amberAccent,
@@ -240,7 +253,9 @@ class LoginPageState extends BaseState<LoginPage, LoginPresenter>
                                                   height: 50,
                                                   inputType: TextInputType.text,
                                                   obscureText: true,
-                                                  placeHolder: '密码',
+                                                  placeHolder: S
+                                                      .of(context)
+                                                      .wan_account_user_pwd_hint,
                                                   textColor: Colors.black87,
                                                   accentColor:
                                                       Colors.amberAccent,
@@ -268,7 +283,9 @@ class LoginPageState extends BaseState<LoginPage, LoginPresenter>
                                                   height: 50,
                                                   inputType: TextInputType.text,
                                                   obscureText: true,
-                                                  placeHolder: '确认密码',
+                                                  placeHolder: S
+                                                      .of(context)
+                                                      .wan_account_user_pwd_confirm_hint,
                                                   textColor: Colors.black87,
                                                   accentColor:
                                                       Colors.amberAccent,
@@ -342,8 +359,9 @@ class LoginPageState extends BaseState<LoginPage, LoginPresenter>
     final account = _loginAccountController.text;
     final password = _loginPwdController.text;
     if (account.isEmpty || password.isEmpty) {
-      toast("请输入完整信息");
+      toast(S.of(context).wan_common_form_error_message);
       return;
+
     }
     showLoading();
     presenter.login(account, password);
@@ -354,11 +372,11 @@ class LoginPageState extends BaseState<LoginPage, LoginPresenter>
     final password = _regPwdController.text;
     final confirm = _confirmPwdTextEditingController.text;
     if (account.isEmpty || password.isEmpty || confirm.isEmpty) {
-      toast("请输入完整信息");
+      toast(S.of(context).wan_common_form_error_message);
       return;
     }
     if (password != confirm) {
-      toast('两次密码不一致');
+      toast(S.of(context).wan_account_pwd_no_equal);
       return;
     }
     showLoading();

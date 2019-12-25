@@ -1,4 +1,14 @@
 {
+  "wan_common_form_error_message": "请输入完整信息",
+
+  "wan_account_tab_title_login": "登录",
+  "wan_account_tab_title_reg": "注册",
   "wan_account_user_name_hint": "用户名",
+  "wan_account_user_pwd_hint": "密码",
+  "wan_account_user_pwd_confirm_hint": "确认密码",
+  "wan_account_btn_title_login": "登录",
+  "wan_account_btn_title_reg": "注册",
+  "wan_account_pwd_no_equal": "两次密码不一致",
+
   "wan_home_tab_title_home": "首页"
 }

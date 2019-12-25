@@ -21,7 +21,15 @@ class S implements WidgetsLocalizations {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
+  String get wan_account_btn_title_login => "登录";
+  String get wan_account_btn_title_reg => "注册";
+  String get wan_account_pwd_no_equal => "两次密码不一致";
+  String get wan_account_tab_title_login => "登录";
+  String get wan_account_tab_title_reg => "注册";
   String get wan_account_user_name_hint => "用户名";
+  String get wan_account_user_pwd_confirm_hint => "确认密码";
+  String get wan_account_user_pwd_hint => "密码";
+  String get wan_common_form_error_message => "请输入完整信息";
   String get wan_home_tab_title_home => "首页";
 }
 
@@ -36,7 +44,23 @@ class $zh extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
+  String get wan_account_user_pwd_hint => "密码";
+  @override
+  String get wan_account_btn_title_reg => "注册";
+  @override
+  String get wan_account_tab_title_login => "登录";
+  @override
+  String get wan_common_form_error_message => "请输入完整信息";
+  @override
   String get wan_home_tab_title_home => "首页";
+  @override
+  String get wan_account_user_pwd_confirm_hint => "确认密码";
+  @override
+  String get wan_account_btn_title_login => "登录";
+  @override
+  String get wan_account_pwd_no_equal => "两次密码不一致";
+  @override
+  String get wan_account_tab_title_reg => "注册";
   @override
   String get wan_account_user_name_hint => "用户名";
 }
