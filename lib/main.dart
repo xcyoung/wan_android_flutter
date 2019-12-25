@@ -1,6 +1,5 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
-import 'package:wan_android/moudle/account/login/login_page.dart';
 import 'package:wan_android/moudle/home/home_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:wan_android/generated/i18n.dart';
@@ -16,7 +15,7 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         navigatorObservers: [BotToastNavigatorObserver()],
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primaryColor: Colors.white
         ),
         localizationsDelegates: [
           S.delegate,
@@ -24,7 +23,7 @@ class MyApp extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate,
         ],
         supportedLocales: S.delegate.supportedLocales,
-        home: LoginPage(),
+        home: HomePage(),
       ),
     );
   }

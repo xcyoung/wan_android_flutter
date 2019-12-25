@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:wan_android/moudle/article/article_list_item.dart';
 import 'package:wan_android/moudle/article/article_presenter.dart';
@@ -21,8 +22,9 @@ class ArticlePageState extends BaseState<ArticlePage, ArticlePresenter> with Aut
       create: (_) => provider,
       child: Scaffold(
           appBar: AppBar(
-            title: Text('首页'),
-            centerTitle: true,
+            actions: <Widget>[
+              Icon(FontAwesomeIcons.search)
+            ],
           ),
           body: Consumer<ListProvider<ArticleBean>>(
             builder: (_, provider, __) {

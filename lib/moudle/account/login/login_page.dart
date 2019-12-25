@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wan_android/moudle/account/login/login_presenter.dart';
-import 'package:wan_android/moudle/article/page/article_page.dart';
+import 'package:wan_android/moudle/home/home_page.dart';
 import 'package:wan_android/mvp/mvp_export.dart';
 import 'package:wan_android/utils/toast_extension.dart';
 import 'package:wan_android/widget/wave_widget.dart';
@@ -386,7 +386,7 @@ class LoginPageState extends BaseState<LoginPage, LoginPresenter>
   void onLoginSuccess() {
     hideLoading();
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return ArticlePage();
+      return HomePage();
     }));
   }
 
