@@ -31,6 +31,12 @@ class S implements WidgetsLocalizations {
   String get wan_account_user_pwd_hint => "密码";
   String get wan_common_form_error_message => "请输入完整信息";
   String get wan_home_tab_title_home => "首页";
+  String get wan_home_tab_title_mine => "我的";
+  String get wan_home_tab_title_official => "公众号";
+  String get wan_home_tab_title_project => "项目";
+  String get wan_home_tab_title_system => "体系";
+  String wan_article_item_author(String name) => "$name(Author)";
+  String wan_article_item_share(String name) => "$name";
 }
 
 class $en extends S {
@@ -44,13 +50,19 @@ class $zh extends S {
   TextDirection get textDirection => TextDirection.ltr;
 
   @override
+  String get wan_home_tab_title_system => "体系";
+  @override
   String get wan_account_user_pwd_hint => "密码";
   @override
   String get wan_account_btn_title_reg => "注册";
   @override
   String get wan_home_tab_title_home => "首页";
   @override
+  String get wan_home_tab_title_official => "公众号";
+  @override
   String get wan_account_pwd_no_equal => "两次密码不一致";
+  @override
+  String get wan_home_tab_title_project => "项目";
   @override
   String get wan_account_tab_title_login => "登录";
   @override
@@ -60,9 +72,15 @@ class $zh extends S {
   @override
   String get wan_account_btn_title_login => "登录";
   @override
+  String get wan_home_tab_title_mine => "我的";
+  @override
   String get wan_account_tab_title_reg => "注册";
   @override
   String get wan_account_user_name_hint => "用户名";
+  @override
+  String wan_article_item_share(String name) => "$name";
+  @override
+  String wan_article_item_author(String name) => "$name(Author)";
 }
 
 class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {

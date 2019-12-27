@@ -10,5 +10,12 @@
   "wan_account_btn_title_reg": "注册",
   "wan_account_pwd_no_equal": "两次密码不一致",
 
-  "wan_home_tab_title_home": "首页"
+  "wan_home_tab_title_home": "首页",
+  "wan_home_tab_title_system": "体系",
+  "wan_home_tab_title_official": "公众号",
+  "wan_home_tab_title_project": "项目",
+  "wan_home_tab_title_mine": "我的",
+
+  "wan_article_item_share": "$name",
+  "wan_article_item_author": "$name(Author)"
 }

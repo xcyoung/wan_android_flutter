@@ -1,4 +1,3 @@
-import 'package:rxdart/rxdart.dart';
 import 'package:wan_android/bean/wan_response.dart';
 import 'package:wan_android/moudle/article/model/article_model.dart';
 import 'package:wan_android/service/article_service.dart';
@@ -10,7 +9,7 @@ ArticleRepository get articleRepository => _repository;
 class ArticleRepository {
   final _remote = ArticleService();
 
-  Observable<WanResponse<ArticleList>> getArticleList(int pageIndex) {
+  Future<WanResponse<ArticleList>> getArticleList(int pageIndex) {
     return _remote.getArticleList(pageIndex);
   }
 }
