@@ -1,3 +1,4 @@
+import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 
 class HttpManager {
@@ -16,17 +17,17 @@ class HttpManager {
         baseUrl: 'https://www.wanandroid.com/',
         connectTimeout: 30000,
         receiveTimeout: 30000);
-//    (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) {
-//      // config the http client
-//      client.findProxy = (uri) {
-//        //proxy all request to localhost:8888
-//        return "PROXY 10.196.50.233:8888";
-//      };
+    (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) {
+      // config the http client
+      client.findProxy = (uri) {
+        //proxy all request to localhost:8888
+        return "PROXY 10.196.50.233:8888";
+      };
 //      client.badCertificateCallback =
 //          (X509Certificate cert, String host, int port) => true;
-//      // you can also create a new HttpClient to dio
-//      // return new HttpClient();
-//    };
+      // you can also create a new HttpClient to dio
+      // return new HttpClient();
+    };
   }
 
   Dio getDio() => _dio;

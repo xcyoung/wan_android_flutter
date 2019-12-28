@@ -1,12 +1,16 @@
 import 'package:wan_android/bean/pagination.dart';
 import 'package:wan_android/http/http_export.dart';
+import 'package:wan_android/moudle/article/model/article_item_model.dart';
 import 'package:wan_android/moudle/article/model/article_model.dart';
 import 'package:wan_android/moudle/article/model/article_repository.dart';
+import 'package:wan_android/moudle/article/model/article_top_model.dart';
 import 'package:wan_android/moudle/common/list/list_export.dart';
 
 import 'page/article_page.dart';
 
 class ArticlePresenter extends ListPresenter<ArticlePageState> {
+  final List<ArticleBean> _list = [];
+
   @override
   int getStartPage() {
     return 0;
@@ -14,36 +18,43 @@ class ArticlePresenter extends ListPresenter<ArticlePageState> {
 
   @override
   Future loadPageData(int index) async {
-    await WanHttpResultObservable<ArticleList>(
-            articleRepository.getArticleList(index))
-        .watch((result) {
-          onDataChanged(result.data);
-//      final page = result.data;
-//      if (curIndex == getStartPage()) {
-//        // refresh
-//        view.onDataSuccess(true);
-////        view.easyRefreshController.finishRefresh();
-//        view.provider.list.clear();
-//      } else {
-//        view.onDataSuccess(false);
-////        view.easyRefreshController.finishLoad();
-//      }
-////      curIndex = page.curPage;
-//      if (page.datas.isEmpty) {
-//        //  已无更多数据
-//      }
-//      if (page.datas.isNotEmpty) {
-//        view.provider.addAll(page.datas);
-//      }
-    }, (code, message) {
-      view.onError(code, message);
+    if (index == getStartPage()) {
+      await loadTop();
+      await loadList(index);
+    } else {
+      await loadList(index);
+    }
+  }
+
+  Future loadTop() async {
+    await articleRepository.getTopArticleList().then((response) {
+      final res = ArticleTopList.fromJson(response.data);
+      WanHttpResultObservable<ArticleTopList>(res).watch((result) {
+        _list.clear();
+        _list.addAll(result.data);
+      }, (code, message) {
+        view.onError(code, message);
+      });
+    });
+  }
+
+  Future loadList(int index) async {
+    await articleRepository.getArticleList(index).then((response) {
+      final res = ArticleListModel.fromJson(response.data);
+      WanHttpResultObservable<ArticleListModel>(res)
+          .watch((result) {
+        onDataChanged(result.data);
+      }, (code, message) {
+        view.onError(code, message);
+      });
     });
   }
 
   @override
   void finishLoad(Pagination page) {
     if (page.datas.isNotEmpty) {
-      view.provider.addAll(page.datas);
+      _list.addAll(page.datas as List<ArticleBean>);
+      view.provider.addAll(_list);
     }
     view.onDataSuccess(false);
   }
@@ -52,7 +63,8 @@ class ArticlePresenter extends ListPresenter<ArticlePageState> {
   void finishRefresh(Pagination page) {
     view.provider.clear();
     if (page.datas.isNotEmpty) {
-      view.provider.addAll(page.datas);
+      _list.addAll(page.datas as List<ArticleBean>);
+      view.provider.addAll(_list);
     }
     view.onDataSuccess(true);
   }

@@ -1,10 +1,14 @@
-import 'package:wan_android/bean/wan_response.dart';
+import 'package:dio/dio.dart';
 import 'package:wan_android/http/net_utils.dart';
-import 'package:wan_android/moudle/article/model/article_model.dart';
 
 class ArticleService {
-  Future<WanResponse<ArticleList>> getArticleList(int pageIndex) {
+  Future<Response> getArticleList(int pageIndex) {
     final url = 'article/list/$pageIndex/json';
-    return request<ArticleList>(Method.get, url);
+    return request(Method.get, url);
+  }
+
+  Future<Response> getTopArticleList() {
+    final url = 'article/top/json';
+    return request(Method.get, url);
   }
 }

@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:wan_android/moudle/account/login/login_page.dart';
 import 'package:wan_android/moudle/article/article_list_item.dart';
 import 'package:wan_android/moudle/article/article_presenter.dart';
-import 'package:wan_android/moudle/article/model/article_model.dart';
+import 'package:wan_android/moudle/article/model/article_item_model.dart';
 import 'package:wan_android/mvp/mvp_export.dart';
 import 'package:wan_android/provider/list_provider.dart';
 import 'package:wan_android/utils/toast_extension.dart';
