@@ -30,49 +30,45 @@ class ArticlePresenter extends ListPresenter<ArticlePageState> {
   }
 
   Future loadTop() async {
-    await articleRepository.getTopArticleList().then((response) {
-      final res = ArticleTopList.fromJson(response.data);
-      WanHttpResultObservable<ArticleTopList>(res).watch((result) {
-        _list.clear();
-        _list.addAll(result.data);
-      }, (code, message) {
-        view.onError(code, message);
-      });
+    final response = await articleRepository.getTopArticleList();
+    final res = ArticleTopList.fromJson(response.data);
+    WanHttpResultObservable<ArticleTopList>(res).watch((result) {
+      _list.clear();
+      _list.addAll(result.data);
+    }, (code, message) {
+      view.onError(code, message);
     });
   }
 
   Future loadList(int index) async {
-    await articleRepository.getArticleList(index).then((response) {
-      final res = ArticleListModel.fromJson(response.data);
-      WanHttpResultObservable<ArticleListModel>(res).watch((result) {
-        onDataChanged(result.data);
-      }, (code, message) {
-        view.onError(code, message);
-      });
+    final response = await articleRepository.getArticleList(index);
+    final res = ArticleListModel.fromJson(response.data);
+    WanHttpResultObservable<ArticleListModel>(res).watch((result) {
+      onDataChanged(result.data);
+    }, (code, message) {
+      view.onError(code, message);
     });
   }
 
   Future<bool> collectInsideArticle(int id) async {
-    await articleRepository.collectInsideArticle(id).then((response) {
-      final res = EmptyModel.fromJson(response.data);
-      WanHttpResultObservable<EmptyModel>(res).watch((result) {
-        return Future.value(true);
-      }, (code, message) {
-        view.onError(code, message);
-        return Future.value(false);
-      });
+    final response = await articleRepository.collectInsideArticle(id);
+    final res = EmptyModel.fromJson(response.data);
+    WanHttpResultObservable<EmptyModel>(res).watch((result) {
+      return Future.value(true);
+    }, (code, message) {
+      view.onError(code, message);
+      return Future.value(false);
     });
   }
 
   Future<bool> unCollectArticle(int id) async {
-    await articleRepository.unCollectArticle(id).then((response) {
-      final res = EmptyModel.fromJson(response.data);
-      WanHttpResultObservable<EmptyModel>(res).watch((result) {
-        return Future.value(false);
-      }, (code, message) {
-        view.onError(code, message);
-        return Future.value(true);
-      });
+    final response = await articleRepository.unCollectArticle(id);
+    final res = EmptyModel.fromJson(response.data);
+    WanHttpResultObservable<EmptyModel>(res).watch((result) {
+      return Future.value(false);
+    }, (code, message) {
+      view.onError(code, message);
+      return Future.value(true);
     });
   }
 
