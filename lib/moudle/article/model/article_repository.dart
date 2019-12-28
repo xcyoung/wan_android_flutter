@@ -15,4 +15,12 @@ class ArticleRepository {
   Future<Response> getTopArticleList() {
     return _remote.getTopArticleList();
   }
+
+  Future<Response> collectInsideArticle(int id) {
+    return _remote.collectInsideArticle(id);
+  }
+
+  Future<Response> unCollectArticle(int id) {
+    return _remote.unCollectArticle(id);
+  }
 }

@@ -11,4 +11,14 @@ class ArticleService {
     final url = 'article/top/json';
     return request(Method.get, url);
   }
+
+  Future<Response> collectInsideArticle(int id) {
+    final url = 'lg/collect/$id/json';
+    return request(Method.post, url);
+  }
+
+  Future<Response> unCollectArticle(int id) {
+    final url = "lg/uncollect_originId/$id/json";
+    return request(Method.post, url);
+  }
 }

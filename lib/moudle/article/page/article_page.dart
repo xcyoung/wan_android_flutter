@@ -64,7 +64,15 @@ class ArticlePageState extends BaseState<ArticlePage, ArticlePresenter>
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
                         (BuildContext context, int index) {
-                      return ArticleListItem(provider.list[index]);
+                      return ArticleListItem(provider.list[index],
+                          (isLike, item) {
+                        print("isLike:$isLike");
+                        if (!isLike) {
+                          return this.presenter.collectInsideArticle(item.id);
+                        } else {
+                          return this.presenter.unCollectArticle(item.id);
+                        }
+                      });
                     }, childCount: provider.list.length),
                   )
                 ],

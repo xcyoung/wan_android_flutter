@@ -17,5 +17,6 @@
   "wan_home_tab_title_mine": "我的",
 
   "wan_article_item_share": "$name",
-  "wan_article_item_author": "$name(Author)"
+  "wan_article_item_author": "$name(Author)",
+  "wan_article_item_sticky": "置顶"
 }

@@ -29,6 +29,7 @@ class S implements WidgetsLocalizations {
   String get wan_account_user_name_hint => "用户名";
   String get wan_account_user_pwd_confirm_hint => "确认密码";
   String get wan_account_user_pwd_hint => "密码";
+  String get wan_article_item_sticky => "置顶";
   String get wan_common_form_error_message => "请输入完整信息";
   String get wan_home_tab_title_home => "首页";
   String get wan_home_tab_title_mine => "我的";
@@ -53,6 +54,8 @@ class $zh extends S {
   String get wan_home_tab_title_system => "体系";
   @override
   String get wan_account_user_pwd_hint => "密码";
+  @override
+  String get wan_article_item_sticky => "置顶";
   @override
   String get wan_account_btn_title_reg => "注册";
   @override

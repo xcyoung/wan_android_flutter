@@ -1,14 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:like_button/like_button.dart';
 import 'package:wan_android/generated/i18n.dart';
 import 'package:wan_android/moudle/article/model/article_item_model.dart';
 import 'package:wan_android/widget/label.dart';
 
+typedef OnLikeCallback = Future<bool> Function(bool isLike, ArticleBean item);
+
 class ArticleListItem extends StatefulWidget {
   ArticleBean item;
+  OnLikeCallback likeCallback;
 
-  ArticleListItem(this.item);
+  ArticleListItem(this.item, this.likeCallback);
 
   @override
   _ArticleListItemState createState() => _ArticleListItemState();
@@ -104,22 +108,40 @@ class _ArticleListItemState extends State<ArticleListItem> {
                 padding: EdgeInsets.fromLTRB(16, 4, 16, 8),
                 child: Row(
                   children: <Widget>[
+                    Offstage(
+                      offstage: item.type != 1,
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 4.0),
+                        child: Text(
+                          S.of(context).wan_article_item_sticky,
+                          style: TextStyle(color: Colors.blue, fontSize: 12),
+                        ),
+                      ),
+                    ),
                     Expanded(
                       child: Text(
                         item.superChapterName + '/' + item.chapterName,
                         style: TextStyle(fontSize: 12),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          item.collect = !item.collect;
-                        });
+                    LikeButton(
+                      isLiked: item.collect,
+                      likeBuilder: (bool isLiked) {
+                        return isLiked
+                            ? Icon(Icons.favorite, color: Colors.red)
+                            : Icon(Icons.favorite_border,
+                                color: Colors.black26);
                       },
-                      child: Icon(
-                        item.collect ? Icons.favorite : Icons.favorite_border,
-                        color: Colors.red,
+                      circleColor:
+                          CircleColor(start: Colors.redAccent, end: Colors.red),
+                      bubblesColor: BubblesColor(
+                        dotPrimaryColor: Colors.red,
+                        dotSecondaryColor: Colors.redAccent,
                       ),
+                      onTap: (bool isLiked) {
+                        final a = widget.likeCallback(isLiked, item);
+                        return a;
+                      },
                     )
                   ],
                 ),
