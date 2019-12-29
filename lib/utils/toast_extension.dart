@@ -1,7 +1,7 @@
 import 'package:bot_toast/bot_toast.dart';
-import 'package:wan_android/mvp/mvp_export.dart' show BaseState;
+import 'package:flutter/material.dart';
 
-extension ToastExtension on BaseState {
+extension ToastExtension on Widget {
   void showLoading() {
     BotToast.showLoading();
   }

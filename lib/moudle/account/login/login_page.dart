@@ -5,6 +5,7 @@ import 'package:wan_android/generated/i18n.dart';
 import 'package:wan_android/moudle/account/login/login_presenter.dart';
 import 'package:wan_android/moudle/home/home_page.dart';
 import 'package:wan_android/mvp/mvp_export.dart';
+import 'package:wan_android/res/color/color_manager.dart';
 import 'package:wan_android/utils/toast_extension.dart';
 import 'package:wan_android/widget/wave_widget.dart';
 import 'package:wan_android/widget/x_textfield.dart';
@@ -55,13 +56,13 @@ class LoginPageState extends BaseState<LoginPage, LoginPresenter>
             Container(
               decoration: BoxDecoration(
                   gradient: LinearGradient(
-                colors: [Color(0xCC03A9F4), Colors.white],
+                colors: [ColorManager.of(context).color_blue1, ColorManager.of(context).color_bg],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
               )),
               child: WaveWidget(
                 waveAmplitude: 18.0,
-                bgColor: Color(0xCC03A9F4),
+                bgColor: ColorManager.of(context).color_blue1,
                 size: Size(800.0, 150.0),
               ),
             ),
@@ -359,10 +360,10 @@ class LoginPageState extends BaseState<LoginPage, LoginPresenter>
     final account = _loginAccountController.text;
     final password = _loginPwdController.text;
     if (account.isEmpty || password.isEmpty) {
-      toast(S.of(context).wan_common_form_error_message);
+      widget.toast(S.of(context).wan_common_form_error_message);
       return;
     }
-    showLoading();
+    widget.showLoading();
     presenter.login(account, password);
   }
 
@@ -371,32 +372,32 @@ class LoginPageState extends BaseState<LoginPage, LoginPresenter>
     final password = _regPwdController.text;
     final confirm = _confirmPwdTextEditingController.text;
     if (account.isEmpty || password.isEmpty || confirm.isEmpty) {
-      toast(S.of(context).wan_common_form_error_message);
+      widget.toast(S.of(context).wan_common_form_error_message);
       return;
     }
     if (password != confirm) {
-      toast(S.of(context).wan_account_pwd_no_equal);
+      widget.toast(S.of(context).wan_account_pwd_no_equal);
       return;
     }
-    showLoading();
+    widget.showLoading();
     presenter.reg(account, password, confirm);
   }
 
   void onLoginSuccess() {
-    hideLoading();
+    widget.hideLoading();
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return HomePage();
     }));
   }
 
   void onRegSuccess() {
-    hideLoading();
+    widget.hideLoading();
     _tabController.index = 0;
   }
 
   @override
   void onError(int code, String message) {
-    hideLoading();
-    toastError(code, message);
+    widget.hideLoading();
+    widget.toastError(code, message);
   }
 }

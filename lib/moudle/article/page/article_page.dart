@@ -90,7 +90,7 @@ class ArticlePageState extends BaseState<ArticlePage, ArticlePresenter>
 
   @override
   void onError(int code, String message) {
-    toastError(code, message);
+    widget.toastError(code, message);
   }
 
   void onDataSuccess(bool isRefresh) {
