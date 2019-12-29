@@ -23,11 +23,6 @@ class ArticlePageState extends BaseState<ArticlePage, ArticlePresenter>
   EasyRefreshController _easyRefreshController = EasyRefreshController();
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     super.build(context);
     return ChangeNotifierProvider<ListProvider<ArticleBean>>(
@@ -56,8 +51,8 @@ class ArticlePageState extends BaseState<ArticlePage, ArticlePresenter>
                 header: MaterialHeader(),
                 footer: MaterialFooter(),
                 controller: _easyRefreshController,
-                enableControlFinishRefresh: true,
-                enableControlFinishLoad: true,
+                enableControlFinishRefresh: false,
+                enableControlFinishLoad: false,
                 firstRefresh: true,
                 emptyWidget: this.provider.list.isEmpty ? Text('empty!') : null,
                 slivers: <Widget>[
@@ -100,12 +95,12 @@ class ArticlePageState extends BaseState<ArticlePage, ArticlePresenter>
 
   void onDataSuccess(bool isRefresh) {
 //    BotToast.showText(text: 'isRefresh:$isRefresh');
-    setState(() {
-      if (isRefresh)
-        _easyRefreshController.finishRefresh();
-      else
-        _easyRefreshController.finishLoad();
-    });
+//    setState(() {
+//      if (isRefresh)
+//        _easyRefreshController.finishRefresh(noMore: false);
+//      else
+//        _easyRefreshController.finishLoad(noMore: false);
+//    });
   }
 
   @override

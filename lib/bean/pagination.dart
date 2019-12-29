@@ -15,4 +15,11 @@ class Pagination<T> {
       this.offset,
       this.size,
       this.datas});
+
+  @override
+  String toString() {
+    return 'Pagination{over: $over, pageCount: $pageCount, total: $total, curPage: $curPage, offset: $offset, size: $size}';
+  }
+
+
 }

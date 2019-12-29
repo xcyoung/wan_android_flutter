@@ -1,5 +1,5 @@
 import 'package:wan_android/bean/pagination.dart';
-import 'package:wan_android/mvp/mvp_export.dart' show IMvpView,BasePresenter;
+import 'package:wan_android/mvp/mvp_export.dart' show IMvpView, BasePresenter;
 
 abstract class ListPresenter<V extends IMvpView> extends BasePresenter<V> {
   int curIndex;
@@ -7,13 +7,17 @@ abstract class ListPresenter<V extends IMvpView> extends BasePresenter<V> {
   Future load(bool isClear) async {
     if (isClear) {
       curIndex = getStartPage();
+      print("isClear:$isClear,curIndex:$curIndex");
       await loadPageData(curIndex);
     } else {
-      await loadPageData(curIndex + 1);
+      curIndex++;
+      print("isClear:$isClear,curIndex:${curIndex}");
+      await loadPageData(curIndex);
     }
   }
 
   void onDataChanged(Pagination page) {
+    print("onDataChanged:$page");
     if (curIndex == getStartPage()) {
       // refresh
       finishRefresh(page);
@@ -21,10 +25,11 @@ abstract class ListPresenter<V extends IMvpView> extends BasePresenter<V> {
       finishLoad(page);
     }
 
-    curIndex = page.curPage;
-
     if (page.datas.isEmpty) {
       //  已无更多数据
+      if (curIndex != getStartPage()) {   //  上拉加载无更多数据时回退curIndex
+        curIndex--;
+      }
     }
   }
 

@@ -75,10 +75,11 @@ class ArticlePresenter extends ListPresenter<ArticlePageState> {
   @override
   void finishLoad(Pagination page) {
     if (page.datas.isNotEmpty) {
-      _list.addAll(page.datas as List<ArticleBean>);
-      view.provider.addAll(_list);
+      final list = page.datas as List<ArticleBean>;
+      _list.addAll(list);
+      view.provider.addAll(list);
     }
-    view.onDataSuccess(false);
+//    view.onDataSuccess(false);
   }
 
   @override
@@ -88,6 +89,6 @@ class ArticlePresenter extends ListPresenter<ArticlePageState> {
       _list.addAll(page.datas as List<ArticleBean>);
       view.provider.addAll(_list);
     }
-    view.onDataSuccess(true);
+//    view.onDataSuccess(true);
   }
 }
