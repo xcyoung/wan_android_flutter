@@ -45,8 +45,6 @@ class LoginPageState extends BaseState<LoginPage, LoginPresenter>
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle.light.copyWith(statusBarColor: Color(0xEE03A9F4)));
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -56,7 +54,10 @@ class LoginPageState extends BaseState<LoginPage, LoginPresenter>
             Container(
               decoration: BoxDecoration(
                   gradient: LinearGradient(
-                colors: [ColorManager.of(context).color_blue1, ColorManager.of(context).color_bg],
+                colors: [
+                  ColorManager.of(context).color_blue1,
+                  ColorManager.of(context).color_bg
+                ],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
               )),
@@ -81,12 +82,12 @@ class LoginPageState extends BaseState<LoginPage, LoginPresenter>
                             margin: EdgeInsets.fromLTRB(20, 0, 20, 20),
                             width: 300,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: ColorManager.of(context).color_bg,
                               borderRadius:
                                   BorderRadius.all(Radius.circular(5.0)),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black12,
+                                  color: Colors.black26,
                                   offset: Offset(1.0, 3.0),
                                   blurRadius: 5.0,
                                 )
@@ -104,13 +105,18 @@ class LoginPageState extends BaseState<LoginPage, LoginPresenter>
                                       decoration: BoxDecoration(
                                           border: Border(
                                               bottom: BorderSide(
-                                                  color: Colors.black26,
+                                                  color:
+                                                      ColorManager.of(context)
+                                                          .color_black3,
                                                   width: 1.0,
                                                   style: BorderStyle.solid))),
                                       child: TabBar(
                                         controller: _tabController,
-                                        labelColor: Colors.blue,
-                                        unselectedLabelColor: Colors.black26,
+                                        labelColor:
+                                            ColorManager.of(context).app_main,
+                                        unselectedLabelColor:
+                                            ColorManager.of(context)
+                                                .color_black3,
                                         indicatorWeight: 5.0,
                                         indicatorPadding:
                                             EdgeInsets.fromLTRB(16, 8, 16, 0),
@@ -160,13 +166,20 @@ class LoginPageState extends BaseState<LoginPage, LoginPresenter>
                                                   placeHolder: S
                                                       .of(context)
                                                       .wan_account_user_name_hint,
-                                                  textColor: Colors.black87,
-                                                  accentColor: Colors.black54,
+                                                  textColor:
+                                                      ColorManager.of(context)
+                                                          .color_black1,
+                                                  accentColor:
+                                                      ColorManager.of(context)
+                                                          .color_black2,
                                                   placeHolderColor:
-                                                      Colors.black45,
+                                                      ColorManager.of(context)
+                                                          .color_black3,
                                                   prefixIcon: Icon(
                                                     FontAwesomeIcons.user,
-                                                    color: Colors.black54,
+                                                    color:
+                                                        ColorManager.of(context)
+                                                            .color_black2,
                                                     size: 20.0,
                                                   ),
                                                   controller:
@@ -190,13 +203,20 @@ class LoginPageState extends BaseState<LoginPage, LoginPresenter>
                                                   placeHolder: S
                                                       .of(context)
                                                       .wan_account_user_pwd_hint,
-                                                  textColor: Colors.black87,
-                                                  accentColor: Colors.black54,
+                                                  textColor:
+                                                      ColorManager.of(context)
+                                                          .color_black1,
+                                                  accentColor:
+                                                      ColorManager.of(context)
+                                                          .color_black2,
                                                   placeHolderColor:
-                                                      Colors.black45,
+                                                      ColorManager.of(context)
+                                                          .color_black3,
                                                   prefixIcon: Icon(
                                                     Icons.lock,
-                                                    color: Colors.black54,
+                                                    color:
+                                                        ColorManager.of(context)
+                                                            .color_black2,
                                                     size: 24.0,
                                                   ),
                                                   controller:
@@ -226,14 +246,20 @@ class LoginPageState extends BaseState<LoginPage, LoginPresenter>
                                                   placeHolder: S
                                                       .of(context)
                                                       .wan_account_user_name_hint,
-                                                  textColor: Colors.black87,
+                                                  textColor:
+                                                      ColorManager.of(context)
+                                                          .color_black1,
                                                   accentColor:
-                                                      Colors.amberAccent,
+                                                      ColorManager.of(context)
+                                                          .color_black2,
                                                   placeHolderColor:
-                                                      Colors.black45,
+                                                      ColorManager.of(context)
+                                                          .color_black3,
                                                   prefixIcon: Icon(
                                                     FontAwesomeIcons.user,
-                                                    color: Colors.black54,
+                                                    color:
+                                                        ColorManager.of(context)
+                                                            .color_black2,
                                                     size: 20.0,
                                                   ),
                                                   controller:
@@ -257,14 +283,20 @@ class LoginPageState extends BaseState<LoginPage, LoginPresenter>
                                                   placeHolder: S
                                                       .of(context)
                                                       .wan_account_user_pwd_hint,
-                                                  textColor: Colors.black87,
+                                                  textColor:
+                                                      ColorManager.of(context)
+                                                          .color_black1,
                                                   accentColor:
-                                                      Colors.amberAccent,
+                                                      ColorManager.of(context)
+                                                          .color_black2,
                                                   placeHolderColor:
-                                                      Colors.black45,
+                                                      ColorManager.of(context)
+                                                          .color_black3,
                                                   prefixIcon: Icon(
                                                     Icons.lock,
-                                                    color: Colors.black54,
+                                                    color:
+                                                        ColorManager.of(context)
+                                                            .color_black2,
                                                     size: 24.0,
                                                   ),
                                                   controller: _regPwdController,
@@ -287,14 +319,20 @@ class LoginPageState extends BaseState<LoginPage, LoginPresenter>
                                                   placeHolder: S
                                                       .of(context)
                                                       .wan_account_user_pwd_confirm_hint,
-                                                  textColor: Colors.black87,
+                                                  textColor:
+                                                      ColorManager.of(context)
+                                                          .color_black1,
                                                   accentColor:
-                                                      Colors.amberAccent,
+                                                      ColorManager.of(context)
+                                                          .color_black2,
                                                   placeHolderColor:
-                                                      Colors.black45,
+                                                      ColorManager.of(context)
+                                                          .color_black3,
                                                   prefixIcon: Icon(
                                                     Icons.lock,
-                                                    color: Colors.black54,
+                                                    color:
+                                                        ColorManager.of(context)
+                                                            .color_black2,
                                                     size: 24.0,
                                                   ),
                                                   controller:
@@ -312,8 +350,8 @@ class LoginPageState extends BaseState<LoginPage, LoginPresenter>
                           width: 250,
                           padding: EdgeInsets.fromLTRB(16, 8, 16, 0),
                           child: FlatButton(
-                              color: Colors.blue,
-                              textColor: Colors.white,
+                              color: ColorManager.of(context).app_main,
+                              textColor: ColorManager.of(context).color_bg,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20.0)),
                               onPressed: () {
@@ -328,7 +366,7 @@ class LoginPageState extends BaseState<LoginPage, LoginPresenter>
                                 child: Text(
                                   _curPosition == 0 ? '登录' : '注册',
                                   style: TextStyle(
-                                      color: Colors.white, fontSize: 16.0),
+                                      color: ColorManager.of(context).color_bg, fontSize: 16.0),
                                 ),
                               )),
                         )
