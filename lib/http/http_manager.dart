@@ -1,5 +1,11 @@
+import 'dart:io';
+
+import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:wan_android/http/interceptor/cookie_interceptor.dart';
+import 'package:wan_android/http/interceptor/response_interceptor.dart';
 
 class HttpManager {
   static HttpManager _instance;
@@ -17,7 +23,8 @@ class HttpManager {
         baseUrl: 'https://www.wanandroid.com/',
         connectTimeout: 30000,
         receiveTimeout: 30000);
-    (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) {
+    (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (client) {
       // config the http client
 //      client.findProxy = (uri) {
 //        //proxy all request to localhost:8888
@@ -30,9 +37,22 @@ class HttpManager {
     };
   }
 
+  Future init() async {
+    await _addCookieInterceptors();
+  }
+
   Dio getDio() => _dio;
 
   void addInterceptor(Interceptor interceptor) {
     _dio.interceptors.add(interceptor);
+  }
+
+  Future _addCookieInterceptors() async {
+    Directory tempDir = await getTemporaryDirectory();
+    String tempPath = tempDir.path + "/dioCookie";
+    print('DioUtil : http cookie path = $tempPath');
+    CookieJar cj = PersistCookieJar(dir: tempPath, ignoreExpires: true);
+    _dio.interceptors.add(CookieInterceptor(cj));
+    _dio.interceptors.add(ResponseInterceptors());
   }
 }

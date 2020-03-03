@@ -17,7 +17,7 @@ class Label extends StatelessWidget {
       child: Text(
         data,
         style: TextStyle(
-            color: Colors.red, fontSize: 10, fontWeight: FontWeight.w700),
+            color: color, fontSize: 10, fontWeight: FontWeight.w700),
       ),
     );
   }
