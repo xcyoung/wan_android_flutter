@@ -2,10 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:wan_android/bean/response_data.dart';
 
 import 'http_manager.dart';
 
-Future<Response> request(
+Future<ResultData> request(
   Method method,
   String url, {
   dynamic params,
@@ -17,7 +18,7 @@ Future<Response> request(
       data: params, queryParameters: queryParams, options: options);
 }
 
-Future<Response> _request(String method, String url,
+Future<ResultData> _request(String method, String url,
     {dynamic data,
     Map<String, dynamic> queryParameters,
     Options options}) async {
@@ -25,7 +26,7 @@ Future<Response> _request(String method, String url,
       queryParameters: queryParameters,
       data: data,
       options: _checkOptions(method, options));
-  return response;
+  return response.data;
 }
 
 Map<String, dynamic> parseData(String data) {
