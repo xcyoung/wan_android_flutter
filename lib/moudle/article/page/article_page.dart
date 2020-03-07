@@ -10,6 +10,7 @@ import 'package:wan_android/common/route/route.dart';
 import 'package:wan_android/http/http_export.dart';
 import 'package:wan_android/model/repository.dart';
 import 'package:wan_android/moudle/article/article_banner_item.dart';
+import 'package:wan_android/moudle/article/article_header_delegate.dart';
 import 'package:wan_android/moudle/article/article_list_item.dart';
 import 'package:wan_android/moudle/article/model/article_banner_result.dart';
 import 'package:wan_android/moudle/article/model/article_list_result.dart';
@@ -149,47 +150,12 @@ class ArticlePageState extends State<ArticlePage>
       firstRefresh: true,
       emptyWidget: this.articles.isEmpty ? EmptyWidget() : null,
       slivers: <Widget>[
-        SliverAppBar(
-          expandedHeight: 200.0,
-          pinned: true,
-          backgroundColor: Color(0xFF00BFA6),
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(
-                Icons.search,
-                color: Colors.white,
-              ),
-              onPressed: () {},
-            ),
-          ],
-          flexibleSpace: FlexibleSpaceBar(
-            title: Text(
-              'Wan Android',
-              style: TextStyle(color: Colors.white),
-            ),
-            titlePadding: const EdgeInsets.fromLTRB(24.0, 0, 0, 16.0),
-            background: Stack(
-              fit: StackFit.expand,
-              children: <Widget>[
-                Container(
-                  height: 200.0,
-                  child: ScrollNotificationInterceptor(
-                    child: Swiper(
-                      itemBuilder: (BuildContext context, int index) {
-                        return ArticleBannerItem(banners[index]);
-                      },
-                      itemCount: banners.length,
-                      viewportFraction: 1.0,
-                      autoplay: false,
-                    ),
-                  ),
-                ),
-                // This gradient ensures that the toolbar icons are distinct
-                // against the background image.
-              ],
-            ),
-          ),
-        ),
+        SliverPersistentHeader(
+            pinned: true,
+            delegate: ArticleHeaderDelegate(
+                collapsedHeight: 64,
+                expandedHeight: 200,
+                banners: this.banners)),
         SliverList(
           delegate:
               SliverChildBuilderDelegate((BuildContext context, int index) {

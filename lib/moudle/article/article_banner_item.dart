@@ -20,7 +20,7 @@ class _ArticleBannerItemState extends State<ArticleBannerItem> {
         fit: StackFit.expand,
         children: <Widget>[
           Container(
-            child: Image.network(widget._item.imagePath),
+            child: Image.network(widget._item.imagePath,fit: BoxFit.cover,),
           ),
 //          Positioned(
 //              child: Container(
