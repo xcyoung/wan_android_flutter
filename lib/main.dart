@@ -15,26 +15,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    const MaterialColor a = MaterialColor(
-      0xFF00BFA6,
-      <int, Color>{
-        50: Color(0xFFFFF3E0),
-        100: Color(0xFFFFE0B2),
-        200: Color(0xFFFFCC80),
-        300: Color(0xFFFFB74D),
-        400: Color(0xFFFFA726),
-        500: Color(0xFF00BFA6),
-        600: Color(0xFFFB8C00),
-        700: Color(0xFFF57C00),
-        800: Color(0xFFEF6C00),
-        900: Color(0xFFE65100),
-      },
-    );
     return BotToastInit(
       child: MaterialApp(
         title: 'Flutter Demo',
         navigatorObservers: [BotToastNavigatorObserver()],
-        theme: ThemeData(primaryColor: Color(0xFF00BFA6), primarySwatch: a),
+        theme: ThemeData(
+            primaryColor: Color(0xFF00BFA6),
+            primaryColorLight: Color(0xFFA9E3D9),
+            primaryColorDark: Color(0xFF01A080),
+            accentColor: Color(0xFF00B0FF),
+            backgroundColor: Colors.white),
         localizationsDelegates: [
           S.delegate,
           GlobalMaterialLocalizations.delegate,

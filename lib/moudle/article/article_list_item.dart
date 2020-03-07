@@ -9,12 +9,14 @@ import 'package:wan_android/moudle/article/model/article_list_result.dart'
 import 'package:wan_android/widget/label.dart';
 
 typedef OnLikeCallback = Future<bool> Function(bool isLike, ArticleBean item);
+typedef OnShareCallback = void Function(ArticleBean item);
 
 class ArticleListItem extends StatefulWidget {
   ArticleBean item;
   OnLikeCallback likeCallback;
+  OnShareCallback shareCallback;
 
-  ArticleListItem(this.item, this.likeCallback);
+  ArticleListItem(this.item, this.likeCallback, this.shareCallback);
 
   @override
   _ArticleListItemState createState() => _ArticleListItemState();
@@ -177,24 +179,14 @@ class _ArticleListItemState extends State<ArticleListItem> {
                             ),
                           ),
                           Expanded(
-                            child: LikeButton(
-                              isLiked: item.collect,
-                              likeBuilder: (bool isLiked) {
-                                return isLiked
-                                    ? Icon(Icons.favorite, color: Colors.red)
-                                    : Icon(Icons.favorite_border,
-                                        color: Colors.black26);
-                              },
-                              circleColor: CircleColor(
-                                  start: Colors.redAccent, end: Colors.red),
-                              bubblesColor: BubblesColor(
-                                dotPrimaryColor: Colors.red,
-                                dotSecondaryColor: Colors.redAccent,
-                              ),
-                              onTap: (bool isLiked) {
-                                return Future.value(true);
-                              },
-                            ),
+                            child: IconButton(
+                                icon: Icon(
+                                  Icons.share,
+                                  size: 24.0,
+                                ),
+                                onPressed: () {
+                                  widget.shareCallback(item);
+                                }),
                           ),
                         ],
                       ),

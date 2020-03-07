@@ -15,30 +15,30 @@ class _ArticleBannerItemState extends State<ArticleBannerItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.blue,
+//      color: Colors.blue,
       child: Stack(
         fit: StackFit.expand,
         children: <Widget>[
           Container(
             child: Image.network(widget._item.imagePath,fit: BoxFit.cover,),
           ),
-//          Positioned(
-//              child: Container(
-//            decoration: BoxDecoration(
-//              gradient: LinearGradient(
-//                begin: Alignment.bottomCenter,
-//                end: Alignment(0, -0.1),
-//                colors: <Color>[Colors.black26, Color(0x00000000)],
-//              ),
-//            ),
-//          )),
-//          Positioned(
-//              bottom: 18.0,
-//              left: 18.0,
-//              child: Text(
-//                widget._item.title,
-//                style: TextStyle(fontSize: 20.0, color: Colors.white),
-//              ))
+          Positioned(
+              child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.bottomCenter,
+                end: Alignment(0, -0.1),
+                colors: <Color>[Colors.black26, Colors.transparent],
+              ),
+            ),
+          )),
+          Positioned(
+              bottom: 18.0,
+              left: 18.0,
+              child: Text(
+                widget._item.title,
+                style: TextStyle(fontSize: 20.0, color: Colors.white),
+              ))
         ],
       ),
     );

@@ -28,9 +28,9 @@ class ArticleHeaderDelegate extends SliverPersistentHeaderDelegate {
     }
   }
 
-  Color getStickyHeaderIconColor(double shrinkOffset) {
+  Color getStickyHeaderIconColor(BuildContext context, double shrinkOffset) {
     if (shrinkOffset <= 50) {
-      return Colors.blue;
+      return Theme.of(context).primaryColor;
     } else {
       final int alpha = (shrinkOffset / (this.maxExtent - this.minExtent) * 255)
           .clamp(0, 255)
@@ -48,54 +48,40 @@ class ArticleHeaderDelegate extends SliverPersistentHeaderDelegate {
       child: Stack(
         fit: StackFit.expand,
         children: <Widget>[
-//          Container(
-//            child: ScrollNotificationInterceptor(
-//              child: Swiper(
-//                itemWidth: MediaQuery.of(context).size.width,
-//                itemBuilder: (BuildContext context, int index) {
-//                  return ArticleBannerItem(banners[index]);
-//                },
-//                itemCount: banners.length,
-//                viewportFraction: 1.0,
-//                autoplay: false,
-//                physics: FixedExtentScrollPhysics(),
-//              ),
-//            ),
-//          ),
           Container(
-            child: PageView(
-              children: this.banners.map((f) => ArticleBannerItem(f)).toList(),
-            )
-          ),
+              child: PageView(
+            children: this.banners.map((f) => ArticleBannerItem(f)).toList(),
+          )),
           Positioned(
               left: 0,
               right: 0,
               top: 0,
               child: Container(
                 color: this.getStickyHeaderBgColor(shrinkOffset),
-            height: this.collapsedHeight,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Container(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: Text(
-                    'Wan Android',
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                        color: this.getStickyHeaderTextColor(shrinkOffset)),
-                  ),
-                ),
-                IconButton(
-                    icon: Icon(
-                      Icons.search,
-                      color: this.getStickyHeaderIconColor(shrinkOffset),
+                height: this.collapsedHeight,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Container(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: Text(
+                        'Wan Android',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                            color: this.getStickyHeaderTextColor(shrinkOffset)),
+                      ),
                     ),
-                    onPressed: null)
-              ],
-            ),
-          ))
+                    IconButton(
+                        icon: Icon(
+                          Icons.search,
+                          color: this
+                              .getStickyHeaderIconColor(context, shrinkOffset),
+                        ),
+                        onPressed: null)
+                  ],
+                ),
+              ))
         ],
       ),
     );
