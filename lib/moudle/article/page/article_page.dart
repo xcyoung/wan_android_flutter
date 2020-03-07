@@ -164,7 +164,7 @@ class ArticlePageState extends State<ArticlePage>
               } else {
                 return unCollectArticle(item);
               }
-            });
+            }, (item) {});
           }, childCount: this.articles.length),
         ),
       ],

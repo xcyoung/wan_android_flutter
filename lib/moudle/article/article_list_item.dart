@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:like_button/like_button.dart';
+import 'package:wan_android/common/route/route.dart';
 import 'package:wan_android/generated/i18n.dart';
 import 'package:wan_android/moudle/article/model/article_list_result.dart'
     show ArticleBean;
@@ -33,7 +34,9 @@ class _ArticleListItemState extends State<ArticleListItem> {
           color: Colors.white,
         ),
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            RouteCenter.instance.goToBrowser(context, item.link);
+          },
           child: Stack(
             alignment: Alignment.center,
 //            fit: StackFit.expand,

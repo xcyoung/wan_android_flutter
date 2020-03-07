@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:wan_android/moudle/browser/browser_page.dart';
 import 'package:wan_android/moudle/page_export.dart';
 
 class Path {
   static const String Home = '/wan/home';
   static const String Login = '/wan/login';
   static const String REGISTER = '/wan/register';
+  static const String BROWSER = '/wan/browser';
 }
 
 class RouteCenter {
@@ -25,7 +27,7 @@ class RouteCenter {
   static final Map<String, Function> routes = {
     Path.Home: (context) => HomePage(),
     Path.Login: (context) => LoginPage(),
-    Path.REGISTER: (context) => RegisterPage()
+    Path.REGISTER: (context) => RegisterPage(),
   };
 
   final Route<dynamic> Function(RouteSettings settings) onGenerateRoute =
@@ -62,5 +64,11 @@ class RouteCenter {
 
   void goToHome(context) {
     Navigator.pushNamed(context, Path.Home);
+  }
+
+  void goToBrowser(context, url) {
+//    Navigator.pushNamed(context, Path.BROWSER);
+    Navigator.push(
+        context, new MaterialPageRoute(builder: (context) => BrowserPage(url)));
   }
 }

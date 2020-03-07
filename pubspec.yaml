@@ -40,6 +40,7 @@ dependencies:
   cookie_jar: ^1.0.0
   path_provider: 0.4.1
   dio_cookie_manager: 1.0.0
+  webview_flutter: ^0.3.19+9
 #  flutter_bloc: 2.1.1
 dev_dependencies:
   flutter_test:
