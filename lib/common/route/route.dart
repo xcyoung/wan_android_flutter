@@ -66,9 +66,9 @@ class RouteCenter {
     Navigator.pushNamed(context, Path.Home);
   }
 
-  void goToBrowser(context, url) {
+  void goToBrowser(context, url, title) {
 //    Navigator.pushNamed(context, Path.BROWSER);
-    Navigator.push(
-        context, new MaterialPageRoute(builder: (context) => BrowserPage(url)));
+    Navigator.push(context,
+        new MaterialPageRoute(builder: (context) => BrowserPage(url, title)));
   }
 }

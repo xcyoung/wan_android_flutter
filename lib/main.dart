@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BotToastInit(
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Wan Android',
         navigatorObservers: [BotToastNavigatorObserver()],
         theme: ThemeData(
             primaryColor: Color(0xFF00BFA6),

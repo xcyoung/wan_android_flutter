@@ -35,7 +35,7 @@ class _ArticleListItemState extends State<ArticleListItem> {
         ),
         child: InkWell(
           onTap: () {
-            RouteCenter.instance.goToBrowser(context, item.link);
+            RouteCenter.instance.goToBrowser(context, item.link, item.title);
           },
           child: Stack(
             alignment: Alignment.center,
